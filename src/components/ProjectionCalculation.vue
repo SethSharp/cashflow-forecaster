@@ -7,8 +7,9 @@ const { months, projection } = projectionStore
 </script>
 
 <template>
-  <div>
+  <div data-cy="projection-calculation">
     <Input
+      data-cy="projection-months"
       v-model="months"
       label="Months"
       type="number"
@@ -16,7 +17,8 @@ const { months, projection } = projectionStore
       @update:model-value="months = Number($event)"
     />
 
-    Current projected balance:
-    {{ projection?.balance ?? 0 }}
+    <p>
+      Current projected balance: {{ projection?.balance ?? 0 }}
+    </p>
   </div>
 </template>

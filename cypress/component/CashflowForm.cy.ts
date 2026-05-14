@@ -1,0 +1,48 @@
+import CashflowForm from '../../src/components/CashflowForm.vue'
+
+describe('CashflowForm component test', () => {
+  beforeEach(() => {
+    cy.mount(CashflowForm)
+  })
+
+  it('renders all fields', () => {
+    cy.get("[data-cy='cashflow-form-label'] input").should('exist')
+    cy.get("[data-cy='cashflow-form-amount'] input").should('exist')
+    cy.get("[data-cy='cashflow-form-type'] select").should('exist')
+    cy.get("[data-cy='cashflow-form-frequency'] select").should('exist')
+    cy.get("[data-cy='cashflow-form-submit']").should('exist')
+  })
+
+  it('emits submit with correct entry on form submission', () => {
+    const onSubmit = cy.spy().as('submitSpy')
+    cy.mount(CashflowForm, {
+      props: { onSubmit },
+    })
+
+    cy.get("[data-cy='cashflow-form-label'] input").type('Monthly Salary')
+    cy.get("[data-cy='cashflow-form-amount'] input").clear().type('5000')
+    cy.get("[data-cy='cashflow-form-type'] select").select('income')
+    cy.get("[data-cy='cashflow-form-frequency'] select").select('monthly')
+    cy.get("[data-cy='cashflow-form-submit']").click()
+
+    cy.get('@submitSpy').should('have.been.calledOnce')
+    cy.get('@submitSpy').should('have.been.calledWithMatch', {
+      label: 'Monthly Salary',
+      amount: 5000,
+      type: 'income',
+      frequency: 'monthly',
+    })
+  })
+
+  it('resets form after calling resetForm', () => {
+    cy.mount(CashflowForm).then(({ component }) => {
+      cy.get("[data-cy='cashflow-form-label'] input").type('Rent')
+      cy.get("[data-cy='cashflow-form-amount'] input").clear().type('1200')
+
+      cy.then(() => component.resetForm())
+
+      cy.get("[data-cy='cashflow-form-label'] input").should('have.value', '')
+      cy.get("[data-cy='cashflow-form-amount'] input").should('have.value', '0')
+    })
+  })
+})
