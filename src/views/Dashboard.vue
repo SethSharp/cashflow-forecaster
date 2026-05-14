@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useEntryStore } from '@/stores/entries.ts'
+import { useEntryStore } from '@/stores/entriesStore.js'
 import CreateCashflowModal from '@/components/CreateCashflowModal.vue'
 
 const entryStore = useEntryStore()
