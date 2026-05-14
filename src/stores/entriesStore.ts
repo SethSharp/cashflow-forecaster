@@ -29,8 +29,11 @@ export const useEntryStore = defineStore('entries', () => {
     })
   })
 
+  const hasEntries = computed(() => entries.value.length > 0)
+
   return {
     entries,
+    hasEntries,
     addEntry,
     removeEntry,
     monthlySnapshot,
