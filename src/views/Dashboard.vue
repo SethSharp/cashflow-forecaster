@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useEntryStore } from '@/stores/entriesStore.js'
 import CreateCashflowModal from '@/components/CreateCashflowModal.vue'
+import ProjectionCalculation from '@/components/ProjectionCalculation.vue'
 
 const entryStore = useEntryStore()
 const { entries } = entryStore
@@ -17,6 +18,8 @@ const { entries } = entryStore
 
     <main class="mx-auto max-w-6xl px-6 py-8">
       <p> You have {{ entries.length }} entries </p>
+
+      <ProjectionCalculation />
     </main>
   </div>
 </template>

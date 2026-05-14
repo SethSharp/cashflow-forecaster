@@ -8,3 +8,5 @@ export type CashflowEntry = {
   type: CashflowType;
   frequency: Frequency;
 }
+
+export type MonthlyCashflowEntry = CashflowEntry & { monthly: number }
