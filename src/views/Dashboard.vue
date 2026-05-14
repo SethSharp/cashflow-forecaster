@@ -17,7 +17,7 @@ const { entries } = entryStore
     </header>
 
     <main data-cy="main-container" class="mx-auto max-w-6xl px-6 py-8">
-      <p> You have {{ entries.length }} entries </p>
+      <p>You have {{ entries.length }} entries</p>
 
       <ProjectionCalculation />
     </main>

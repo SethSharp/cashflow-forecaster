@@ -36,10 +36,7 @@ const entrySubmitted = (entry: CashflowEntry, close: () => void) => {
           <p class="mt-0.5 text-sm text-slate-500">Define a recurring income or expense.</p>
         </div>
 
-        <CashflowForm
-          ref="cashflowFormRef"
-          @submit="(entry) => entrySubmitted(entry, close)"
-        />
+        <CashflowForm ref="cashflowFormRef" @submit="(entry) => entrySubmitted(entry, close)" />
       </div>
     </template>
   </Modal>

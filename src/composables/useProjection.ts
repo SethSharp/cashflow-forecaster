@@ -1,9 +1,6 @@
 import { useEntryStore } from '../stores/entriesStore.ts'
 import { computed, ref } from 'vue'
-import type {
-  FinalProjectionSnapshot,
-  MonthlyProjectionSnapshot,
-} from '../types/projection.ts'
+import type { FinalProjectionSnapshot, MonthlyProjectionSnapshot } from '../types/projection.ts'
 
 export const useProjection = () => {
   const entryStore = useEntryStore()
@@ -44,6 +41,6 @@ export const useProjection = () => {
   return {
     months,
     monthlyProjections,
-    projection
+    projection,
   }
 }

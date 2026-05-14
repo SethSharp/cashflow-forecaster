@@ -46,13 +46,34 @@ defineExpose({ resetForm })
 
 <template>
   <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
-    <Input data-cy="cashflow-form-label" v-model="form.label" label="Label" placeholder="e.g. Monthly salary, Office rent" />
+    <Input
+      data-cy="cashflow-form-label"
+      v-model="form.label"
+      label="Label"
+      placeholder="e.g. Monthly salary, Office rent"
+    />
 
-    <Input data-cy="cashflow-form-amount" v-model="form.amount" label="Amount" type="number" placeholder="0.00" />
+    <Input
+      data-cy="cashflow-form-amount"
+      v-model="form.amount"
+      label="Amount"
+      type="number"
+      placeholder="0.00"
+    />
 
     <div class="grid grid-cols-2 gap-3">
-      <Select data-cy="cashflow-form-type" v-model="form.type" label="Type" :options="typeOptions" />
-      <Select data-cy="cashflow-form-frequency" v-model="form.frequency" label="Frequency" :options="frequencyOptions" />
+      <Select
+        data-cy="cashflow-form-type"
+        v-model="form.type"
+        label="Type"
+        :options="typeOptions"
+      />
+      <Select
+        data-cy="cashflow-form-frequency"
+        v-model="form.frequency"
+        label="Frequency"
+        :options="frequencyOptions"
+      />
     </div>
 
     <button

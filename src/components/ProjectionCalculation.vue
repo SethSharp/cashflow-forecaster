@@ -59,7 +59,11 @@ const formatCurrency = (value: number) =>
         <Card>
           <template #header>Net / Month</template>
           <template #content>
-            <p data-cy="projection-net" class="text-xl font-semibold" :class="valueColour(projection?.net ?? 0)">
+            <p
+              data-cy="projection-net"
+              class="text-xl font-semibold"
+              :class="valueColour(projection?.net ?? 0)"
+            >
               {{ formatCurrency(projection?.net ?? 0) }}
             </p>
           </template>
@@ -68,7 +72,11 @@ const formatCurrency = (value: number) =>
         <Card class="ring-1 ring-slate-900/10">
           <template #header>Final Balance</template>
           <template #content>
-            <p data-cy="projection-balance" class="text-xl font-semibold" :class="valueColour(projection?.balance ?? 0)">
+            <p
+              data-cy="projection-balance"
+              class="text-xl font-semibold"
+              :class="valueColour(projection?.balance ?? 0)"
+            >
               {{ formatCurrency(projection?.balance ?? 0) }}
             </p>
             <p class="mt-0.5 text-xs text-slate-400">after {{ months }} months</p>

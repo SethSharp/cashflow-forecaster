@@ -1,9 +1,9 @@
 export type MonthlyProjectionSnapshot = {
-  month: number;
-  expenses: number;
-  income: number;
-  net: number;
-  balance: number;
+  month: number
+  expenses: number
+  income: number
+  net: number
+  balance: number
 }
 
 export type FinalProjectionSnapshot = {
