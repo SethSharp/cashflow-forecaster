@@ -14,6 +14,7 @@ import {
   Filler,
 } from 'chart.js'
 import type { MonthlyProjectionSnapshot } from '@/types/projection.ts'
+import { formatCurrency } from '@/utils/format.ts'
 
 ChartJS.register(
   CategoryScale,
@@ -87,10 +88,7 @@ const chartOptions = computed(() => ({
     },
     tooltip: {
       callbacks: {
-        label: (ctx: any) => {
-          const value = Math.abs(ctx.raw)
-          return ` ${ctx.dataset.label}: $${value.toLocaleString('en-AU', { minimumFractionDigits: 2 })}`
-        },
+        label: (ctx: any) => ` ${ctx.dataset.label}: ${formatCurrency(Math.abs(ctx.raw))}`,
       },
     },
   },

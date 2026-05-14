@@ -5,6 +5,7 @@ import { useEntityStore } from '@/stores/entityStore.ts'
 import CreateCashflowModal from '@/components/CreateCashflowModal.vue'
 import ProjectionCalculation from '@/components/ProjectionCalculation.vue'
 import EntityContainer from '@/components/EntityContainer.vue'
+import EntryCards from '@/components/EntryCards.vue'
 
 const entryStore = useEntryStore()
 const { entries } = storeToRefs(entryStore)
@@ -31,6 +32,8 @@ const { activeEntity, isConsolidated } = storeToRefs(entityStore)
 
         <CreateCashflowModal />
       </div>
+
+      <EntryCards class="mb-6" />
 
       <ProjectionCalculation />
     </main>

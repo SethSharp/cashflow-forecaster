@@ -3,15 +3,13 @@ import { storeToRefs } from 'pinia'
 import Card from '@/components/ui/Card.vue'
 import Input from '@/components/ui/Input.vue'
 import { valueColour } from '@/utils/colour.ts'
+import { formatCurrency } from '@/utils/format.ts'
 import { useEntryStore } from '@/stores/entriesStore.ts'
 import { useProjection } from '@/composables/useProjection.ts'
 import ProjectionChart from '@/components/ProjectionChart.vue'
 
 const { months, monthlyProjections, projection } = useProjection()
 const { hasEntries } = storeToRefs(useEntryStore())
-
-const formatCurrency = (value: number) =>
-  value.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 2 })
 </script>
 
 <template>
