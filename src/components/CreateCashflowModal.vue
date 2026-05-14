@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Modal from '@/components/ui/Modal.vue'
-import { useEntryStore } from '@/stores/entriesStore.js'
+import { useEntryStore } from '@/stores/entriesStore.ts'
 import type { CashflowEntry } from '@/types/cashflow.ts'
 import CashflowForm from '@/components/CashflowForm.vue'
 

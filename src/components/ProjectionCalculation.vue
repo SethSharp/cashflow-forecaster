@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import Card from '@/components/ui/Card.vue'
 import Input from '@/components/ui/Input.vue'
-import { valueColour } from '@/utils/colour.js'
+import { valueColour } from '@/utils/colour.ts'
 import { useEntryStore } from '@/stores/entriesStore.ts'
 import { useProjection } from '@/composables/useProjection.ts'
 import ProjectionChart from '@/components/ProjectionChart.vue'
@@ -37,7 +37,7 @@ const formatCurrency = (value: number) =>
     <div v-if="hasEntries" class="flex flex-col gap-6">
       <ProjectionChart :projections="monthlyProjections" />
 
-      <div class="grid grid-cols-4 gap-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <template #header>Total Income</template>
           <template #content>
