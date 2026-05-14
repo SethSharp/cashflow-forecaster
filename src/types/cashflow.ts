@@ -7,6 +7,7 @@ export type CashflowEntry = {
   amount: number
   type: CashflowType
   frequency: Frequency
+  entityId: string
 }
 
 export type MonthlyCashflowEntry = CashflowEntry & { monthly: number }
