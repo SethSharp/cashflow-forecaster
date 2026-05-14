@@ -9,7 +9,7 @@ export const useEntityStore = defineStore('entities', () => {
   const activeEntityId = ref<string>(DEFAULT_ENTITY.id)
   const isConsolidated = ref(false)
 
-  const activeEntity = computed(() => entities.value.find(e => e.id === activeEntityId.value))
+  const activeEntity = computed(() => entities.value.find((e) => e.id === activeEntityId.value))
 
   const addEntity = (name: string) => {
     const entity: Entity = { id: Date.now().toString(), name }
