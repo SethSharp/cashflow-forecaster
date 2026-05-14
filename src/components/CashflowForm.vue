@@ -3,12 +3,15 @@ import { reactive } from 'vue'
 import Input from '@/components/ui/Input.vue'
 import Select from '@/components/ui/Select.vue'
 import type { CashflowEntry } from '@/types/cashflow.ts'
+import { useEntityStore } from '@/stores/entityStore.ts'
 
 const emits = defineEmits<{
   submit: [entry: CashflowEntry]
 }>()
 
-const form = reactive<Omit<CashflowEntry, 'id'>>({
+const entityStore = useEntityStore()
+
+const form = reactive<Omit<CashflowEntry, 'id' | 'entityId'>>({
   label: '',
   amount: 0,
   type: 'income',
@@ -36,6 +39,7 @@ const resetForm = () => {
 const handleSubmit = () => {
   emits('submit', {
     id: Date.now().toString(),
+    entityId: entityStore.activeEntityId,
     ...form,
     amount: Number(form.amount),
   })

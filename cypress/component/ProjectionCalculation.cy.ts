@@ -2,8 +2,8 @@ import { createPinia } from 'pinia'
 import ProjectionCalculation from '../../src/components/ProjectionCalculation.vue'
 import { useEntryStore } from '../../src/stores/entriesStore'
 
-const salary = { id: '1', label: 'Salary', amount: 400, type: 'income' as const, frequency: 'monthly' as const }
-const rent = { id: '2', label: 'Rent', amount: 600, type: 'expense' as const, frequency: 'monthly' as const }
+const salary = { id: '1', label: 'Salary', amount: 400, type: 'income' as const, frequency: 'monthly' as const, entityId: 'default' }
+const rent = { id: '2', label: 'Rent', amount: 600, type: 'expense' as const, frequency: 'monthly' as const, entityId: 'default' }
 
 const mountWithEntries = (...entries: typeof salary[]) => {
   const pinia = createPinia()

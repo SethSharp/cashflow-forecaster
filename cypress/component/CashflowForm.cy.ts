@@ -1,8 +1,12 @@
+import { createPinia } from 'pinia'
 import CashflowForm from '../../src/components/CashflowForm.vue'
+
+const mount = (props = {}) =>
+  cy.mount(CashflowForm, { global: { plugins: [createPinia()] }, props })
 
 describe('CashflowForm component test', () => {
   beforeEach(() => {
-    cy.mount(CashflowForm)
+    mount()
   })
 
   it('renders all fields', () => {
@@ -15,9 +19,7 @@ describe('CashflowForm component test', () => {
 
   it('emits submit with correct entry on form submission', () => {
     const onSubmit = cy.spy().as('submitSpy')
-    cy.mount(CashflowForm, {
-      props: { onSubmit },
-    })
+    mount({ onSubmit })
 
     cy.get("[data-cy='cashflow-form-label'] input").type('Monthly Salary')
     cy.get("[data-cy='cashflow-form-amount'] input").clear().type('5000')
@@ -35,7 +37,7 @@ describe('CashflowForm component test', () => {
   })
 
   it('resets form after calling resetForm', () => {
-    cy.mount(CashflowForm).then(({ component }) => {
+    mount().then(({ component }) => {
       cy.get("[data-cy='cashflow-form-label'] input").type('Rent')
       cy.get("[data-cy='cashflow-form-amount'] input").clear().type('1200')
 
