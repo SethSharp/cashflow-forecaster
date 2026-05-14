@@ -47,4 +47,45 @@ describe('CashflowForm component test', () => {
       cy.get("[data-cy='cashflow-form-amount'] input").should('have.value', '0')
     })
   })
+
+  describe('validation', () => {
+    it('shows label error when submitted with empty label', () => {
+      cy.get("[data-cy='cashflow-form-submit']").click()
+      cy.get("[data-cy='cashflow-form-label-error']").should('contain', 'Label is required.')
+    })
+
+    it('shows amount error when submitted with zero amount', () => {
+      cy.get("[data-cy='cashflow-form-submit']").click()
+      cy.get("[data-cy='cashflow-form-amount-error']").should('contain', 'Amount must be greater than zero.')
+    })
+
+    it('does not emit submit when form is invalid', () => {
+      const onSubmit = cy.spy().as('submitSpy')
+      mount({ onSubmit })
+
+      cy.get("[data-cy='cashflow-form-submit']").click()
+      cy.get('@submitSpy').should('not.have.been.called')
+    })
+
+    it('clears errors after resetForm is called', () => {
+      mount().then(({ component }) => {
+        cy.get("[data-cy='cashflow-form-submit']").click()
+        cy.get("[data-cy='cashflow-form-label-error']").should('exist')
+
+        cy.then(() => component.resetForm())
+
+        cy.get("[data-cy='cashflow-form-label-error']").should('not.exist')
+        cy.get("[data-cy='cashflow-form-amount-error']").should('not.exist')
+      })
+    })
+
+    it('shows no errors when form is valid', () => {
+      cy.get("[data-cy='cashflow-form-label'] input").type('Salary')
+      cy.get("[data-cy='cashflow-form-amount'] input").clear().type('1000')
+      cy.get("[data-cy='cashflow-form-submit']").click()
+
+      cy.get("[data-cy='cashflow-form-label-error']").should('not.exist')
+      cy.get("[data-cy='cashflow-form-amount-error']").should('not.exist')
+    })
+  })
 })

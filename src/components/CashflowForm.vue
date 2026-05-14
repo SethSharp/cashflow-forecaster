@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import Input from '@/components/ui/Input.vue'
 import Select from '@/components/ui/Select.vue'
+import Error from '@/components/ui/Error.vue'
 import type { CashflowEntry } from '@/types/cashflow.ts'
 import { useEntityStore } from '@/stores/entityStore.ts'
 
@@ -17,6 +18,8 @@ const form = reactive<Omit<CashflowEntry, 'id' | 'entityId'>>({
   type: 'income',
   frequency: 'monthly',
 })
+
+const errors = reactive({ label: '', amount: '' })
 
 const typeOptions = [
   { label: 'Income', value: 'income' },
@@ -34,9 +37,19 @@ const resetForm = () => {
   form.amount = 0
   form.type = 'income'
   form.frequency = 'monthly'
+  errors.label = ''
+  errors.amount = ''
+}
+
+const validate = () => {
+  errors.label = form.label.trim() ? '' : 'Label is required.'
+  errors.amount = Number(form.amount) > 0 ? '' : 'Amount must be greater than zero.'
+  return !errors.label && !errors.amount
 }
 
 const handleSubmit = () => {
+  if (!validate()) return
+
   emits('submit', {
     id: Date.now().toString(),
     entityId: entityStore.activeEntityId,
@@ -50,20 +63,26 @@ defineExpose({ resetForm })
 
 <template>
   <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
-    <Input
-      data-cy="cashflow-form-label"
-      v-model="form.label"
-      label="Label"
-      placeholder="e.g. Monthly salary, Office rent"
-    />
+    <div class="flex flex-col gap-1">
+      <Input
+        data-cy="cashflow-form-label"
+        v-model="form.label"
+        label="Label"
+        placeholder="e.g. Monthly salary, Office rent"
+      />
+      <Error v-if="errors.label" data-cy="cashflow-form-label-error" :message="errors.label" />
+    </div>
 
-    <Input
-      data-cy="cashflow-form-amount"
-      v-model="form.amount"
-      label="Amount"
-      type="number"
-      placeholder="0.00"
-    />
+    <div class="flex flex-col gap-1">
+      <Input
+        data-cy="cashflow-form-amount"
+        v-model="form.amount"
+        label="Amount"
+        type="number"
+        placeholder="0.00"
+      />
+      <Error v-if="errors.amount" data-cy="cashflow-form-amount-error" :message="errors.amount" />
+    </div>
 
     <div class="grid grid-cols-2 gap-3">
       <Select
