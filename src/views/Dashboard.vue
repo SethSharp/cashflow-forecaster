@@ -2,10 +2,10 @@
 import { storeToRefs } from 'pinia'
 import { useEntryStore } from '@/stores/entriesStore.ts'
 import { useEntityStore } from '@/stores/entityStore.ts'
-import CreateCashflowModal from '@/components/CreateCashflowModal.vue'
-import ProjectionCalculation from '@/components/ProjectionCalculation.vue'
-import EntityContainer from '@/components/EntityContainer.vue'
-import EntryCards from '@/components/EntryCards.vue'
+import EntryCards from '@/components/cashflow/EntryCards.vue'
+import EntityContainer from '@/components/entity/EntityContainer.vue'
+import CreateCashflowModal from '@/components/cashflow/CreateCashflowModal.vue'
+import ProjectionCalculation from '@/components/projection/ProjectionCalculation.vue'
 
 const entryStore = useEntryStore()
 const { entries } = storeToRefs(entryStore)
@@ -24,7 +24,7 @@ const { activeEntity, isConsolidated } = storeToRefs(entityStore)
       </div>
     </header>
 
-    <main data-cy="main-container" class="mx-auto max-w-6xl px-6 py-8">
+    <main data-cy="main-container" class="mx-auto max-w-6xl px-6 py-8 space-y-4">
       <div class="mb-6 flex items-center justify-between">
         <p class="text-sm text-slate-500">
           {{ isConsolidated ? 'All entities' : activeEntity?.name }} - {{ entries.length }} entries
@@ -33,7 +33,7 @@ const { activeEntity, isConsolidated } = storeToRefs(entityStore)
         <CreateCashflowModal />
       </div>
 
-      <EntryCards class="mb-6" />
+      <EntryCards />
 
       <ProjectionCalculation />
     </main>

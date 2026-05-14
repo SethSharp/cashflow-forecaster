@@ -6,7 +6,7 @@ import { valueColour } from '@/utils/colour.ts'
 import { formatCurrency } from '@/utils/format.ts'
 import { useEntryStore } from '@/stores/entriesStore.ts'
 import { useProjection } from '@/composables/useProjection.ts'
-import ProjectionChart from '@/components/ProjectionChart.vue'
+import ProjectionChart from '@/components/projection/ProjectionChart.vue'
 
 const { months, monthlyProjections, projection } = useProjection()
 const { hasEntries } = storeToRefs(useEntryStore())

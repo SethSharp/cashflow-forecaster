@@ -13,8 +13,8 @@ import {
   Legend,
   Filler,
 } from 'chart.js'
-import type { MonthlyProjectionSnapshot } from '@/types/projection.ts'
 import { formatCurrency } from '@/utils/format.ts'
+import type { MonthlyProjectionSnapshot } from '@/types/projection.ts'
 
 ChartJS.register(
   CategoryScale,
