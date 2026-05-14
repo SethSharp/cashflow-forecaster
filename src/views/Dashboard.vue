@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useEntryStore } from '@/stores/entriesStore.ts'
 import { useEntityStore } from '@/stores/entityStore.ts'
@@ -11,7 +12,13 @@ const entryStore = useEntryStore()
 const { entries } = storeToRefs(entryStore)
 
 const entityStore = useEntityStore()
-const { activeEntity, isConsolidated } = storeToRefs(entityStore)
+const { activeEntity, activeEntityId, isConsolidated } = storeToRefs(entityStore)
+
+const visibleEntryCount = computed(() =>
+  isConsolidated.value
+    ? entries.value.length
+    : entries.value.filter((e) => e.entityId === activeEntityId.value).length,
+)
 </script>
 
 <template>
@@ -27,7 +34,7 @@ const { activeEntity, isConsolidated } = storeToRefs(entityStore)
     <main data-cy="main-container" class="mx-auto max-w-6xl px-6 py-8 space-y-4">
       <div class="mb-6 flex items-center justify-between">
         <p class="text-sm text-slate-500">
-          {{ isConsolidated ? 'All entities' : activeEntity?.name }} - {{ entries.length }} entries
+          {{ isConsolidated ? 'All entities' : activeEntity?.name }} - {{ visibleEntryCount }} entries
         </p>
 
         <CreateCashflowModal />

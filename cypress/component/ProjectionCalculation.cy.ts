@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import ProjectionCalculation from '../../src/components/ProjectionCalculation.vue'
+import ProjectionCalculation from '../../src/components/projection/ProjectionCalculation.vue'
 import { useEntryStore } from '../../src/stores/entriesStore'
 
 const salary = { id: '1', label: 'Salary', amount: 400, type: 'income' as const, frequency: 'monthly' as const, entityId: 'default' }

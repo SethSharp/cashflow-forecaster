@@ -37,6 +37,36 @@ describe('Dashboard', () => {
     cy.get("[data-cy='projection-balance']").should('contain', '$1,200.00')
   })
 
+  it('shows entry count for active entity only', () => {
+    cy.get("[data-cy='create-cashflow-button']").click()
+    cy.fillCashflowForm({ label: 'Salary', amount: 1000, type: 'income', frequency: 'monthly' })
+
+    cy.get("[data-cy='entity-add-button']").click()
+    cy.get("[data-cy='entity-name-input']").type('Business')
+    cy.get("[data-cy='entity-add-submit']").click()
+    cy.contains('button', 'Business').click()
+
+    // Business has no entries — count should not bleed across entities
+    cy.get('[data-cy="main-container"]').contains('0 entries')
+  })
+
+  it('shows total entry count in consolidated view', () => {
+    cy.get("[data-cy='create-cashflow-button']").click()
+    cy.fillCashflowForm({ label: 'Salary', amount: 1000, type: 'income', frequency: 'monthly' })
+
+    cy.get("[data-cy='entity-add-button']").click()
+    cy.get("[data-cy='entity-name-input']").type('Business')
+    cy.get("[data-cy='entity-add-submit']").click()
+    cy.contains('button', 'Business').click()
+
+    cy.get("[data-cy='create-cashflow-button']").click()
+    cy.fillCashflowForm({ label: 'Revenue', amount: 500, type: 'income', frequency: 'monthly' })
+
+    cy.get("[data-cy='entity-consolidated-button']").click()
+
+    cy.get('[data-cy="main-container"]').contains('2 entries')
+  })
+
   it('shows consolidated balance across multiple entities', () => {
     // Add $400/month to Default entity
     cy.get("[data-cy='create-cashflow-button']").click()

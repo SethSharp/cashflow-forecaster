@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import CashflowForm from '../../src/components/CashflowForm.vue'
+import CashflowForm from '../../src/components/cashflow/CashflowForm.vue'
 
 const mount = (props = {}) =>
   cy.mount(CashflowForm, { global: { plugins: [createPinia()] }, props })
